@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  php:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - "./:/var/www/html"
+    ports:
+      - 8081:80
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - MYSQL_DATABASE=ecommerce
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_RANDOM_ROOT_PASSWORD
+    volumes:
+      - mysql-ecommerce-data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8091:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+volumes:
+   mysql-ecommerce-data: 
