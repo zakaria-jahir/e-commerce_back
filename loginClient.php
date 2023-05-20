@@ -23,7 +23,7 @@ foreach ($clients as $client) {
         $_SESSION['log'] = $username;
         $_SESSION['pw'] = $password;
         $response = 'success';
-        $id = $client['id_c'];
+        $id = $client['id_client'];
 
         $data = array(
             'id' => $id,

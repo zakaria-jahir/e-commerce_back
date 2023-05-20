@@ -22,7 +22,7 @@ foreach ($admins as $admin) {
         $_SESSION['log'] = $username;
         $_SESSION['pw'] = $password;
         $response = 'success';
-        $id = $admin['id'];
+        $id = $admin['id_admin'];
 
         $data = array(
             'id' => $id,
