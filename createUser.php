@@ -8,21 +8,19 @@ if($_POST){
     try{
 
         # Insert query
-        $query = "INSERT INTO Client SET nom=:nom, prenom=:prenom, mail=:mail, numTel=:numTel, password=:password";
+        $query = "INSERT INTO Client SET name_client=:name_client, last_name=:last_name, mail=:mail, pass=:pass";
         # Prepare query for execution
         $stmt = $con->prepare($query);
         # Posted values
-        $nom = $_POST['nom'];
-        $prenom = $_POST['prenom'];
+        $name_client = $_POST['name_client'];
+        $last_name = $_POST['last_name'];
         $mail = $_POST['mail'];
-        $numTel = $_POST['numTel'];
-        $password = $_POST['password'];
+        $pass = $_POST['pass'];
         # Bind the parameters
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':name_client', $name_client);
+        $stmt->bindParam(':last_name', $last_name);
         $stmt->bindParam(':mail', $mail);
-        $stmt->bindParam(':numTel', $numTel);
-        $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':pass', $pass);
         # Execute the query
         if ($stmt->execute()) {
             echo json_encode(array('result'=>'success'));
