@@ -4,16 +4,16 @@
 if($_POST){
     require_once 'config/db.php';
     try{
-        $query = "UPDATE Client SET adresse=:adresse, phone=:phone  WHERE id_client = :id";
+        $query = "UPDATE Client SET adresse=:adresse, phone=:phone  WHERE id_client = :id_client";
 
         #prepare query 
         $stmt = $con->prepare($query);
         # Posted values
-        $id = $_POST['id'];
+        $id_client = $_POST['id_client'];
         $adresse = $_POST['adresse'];
         $phone = $_POST['phone'];
          # Bind the parameters
-         $stmt->bindParam(':id', $id);
+         $stmt->bindParam(':id_client', $id_client);
          $stmt->bindParam(':adresse', $adresse);
          $stmt->bindParam(':phone', $phone);
          # Execute the query
