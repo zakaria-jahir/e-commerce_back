@@ -28,38 +28,18 @@ $data = json_decode(file_get_contents("php://input"));
 
 
 try {
-    $id_category = $data->id_category;
-    $name_product = $data->name_product;
-    $description = $data->description;
-    $pic = $data->pic;
-    $price = $data->price;
-    $availability = $data->availability;
+    $name = $data->name;
     
-    $query = "INSERT INTO `Product`(
-    id_category,
-    name_product,
-    description,
-    pic,
-    price,
-    availability
+    $query = "INSERT INTO `Category`(
+    name
     ) 
     VALUES(
-    :id_category,
-    :name_product,
-    :description,
-    :pic,
-    :price,
-    :availability   
+    :name
     )";
 
     $stmt = $con->prepare($query);
 
-    $stmt->bindValue(':id_category', $id_category, PDO::PARAM_STR);
-    $stmt->bindValue(':name_product', $name_product, PDO::PARAM_STR);
-    $stmt->bindValue(':description', $description, PDO::PARAM_STR);
-    $stmt->bindValue(':pic', $pic, PDO::PARAM_STR);
-    $stmt->bindValue(':price', $price, PDO::PARAM_STR);
-    $stmt->bindValue(':availability', $availability, PDO::PARAM_STR);
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     if ($stmt->execute()) {
 
         http_response_code(201);
