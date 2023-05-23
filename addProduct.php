@@ -31,7 +31,8 @@ try {
     $id_category = $data->id_category;
     $name_product = $data->name_product;
     $description = $data->description;
-    $pic = $data->pic;
+    $pic1 = $data->pic;
+    $pic = substr($pic1,12);
     $price = $data->price;
     $availability = $data->availability;
     
