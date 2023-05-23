@@ -8,7 +8,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-if ($method == "OPTIONS") {
+if ($method == "OPTIONS") { 
     die();
 }
 
