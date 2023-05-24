@@ -26,32 +26,32 @@ require 'config/db.php';
 
 $data = json_decode(file_get_contents("php://input"));
 
-if (!isset($data->id_panier)) {
+if (!isset($data->id_client)) {
     echo json_encode(['success' => 0, 'message' => 'Please enter correct project id.']);
     exit;
 }
 
 try {
 
-    $fetch_post = "SELECT * FROM `panier` WHERE id_panier=:id_panier";
+    $fetch_post = "SELECT * FROM `panier` WHERE id_client=:id_client";
     $fetch_stmt = $con->prepare($fetch_post);
-    $fetch_stmt->bindValue(':id_panier', $data->id_panier, PDO::PARAM_INT);
+    $fetch_stmt->bindValue(':id_client', $data->id_client, PDO::PARAM_INT);
     $fetch_stmt->execute();
-
+  
     if ($fetch_stmt->rowCount() > 0) :
         $row = $fetch_stmt->fetch(PDO::FETCH_ASSOC);
-        $id_panier = isset($data->id_panier) ? $data->id_panier : $row['id_panier'];
+        $id_client = isset($data->id_client) ? $data->id_client : $row['id_client'];
         $etat_livraison ='en cours';
-        $etat_paeiment='en cours';
+        $etat_paiment='en cours';
         $montant_total=$data->montant_total;
+        
         $update_query = "UPDATE `panier` SET etat_livraison = :etat_livraison,etat_paiment = :etat_paiment,montant_total = :montant_total
-        WHERE  id_panier= :id_panier";
-
+        WHERE  id_client= :id_client";
         $update_stmt = $con->prepare($update_query);
 
         $update_stmt->bindValue(':etat_livraison', htmlspecialchars(strip_tags($etat_livraison)), PDO::PARAM_STR);
-        $update_stmt->bindValue(':etat_paeiment', htmlspecialchars(strip_tags($etat_paeiment)), PDO::PARAM_STR);
-        $update_stmt->bindValue(':id_panier', htmlspecialchars(strip_tags($id_panier)), PDO::PARAM_INT);
+        $update_stmt->bindValue(':etat_paiment', htmlspecialchars(strip_tags($etat_paiment)), PDO::PARAM_STR);
+        $update_stmt->bindValue(':id_client', htmlspecialchars(strip_tags($id_client)), PDO::PARAM_INT);
         $update_stmt->bindValue(':montant_total', htmlspecialchars(strip_tags($montant_total)), PDO::PARAM_INT);
 
 
@@ -59,7 +59,7 @@ try {
 
             echo json_encode([
                 'success' => 1,
-                'message' => 'ligne commande updated successfully'
+                'message' => 'panier commande updated successfully'
             ]);
             exit;
         }

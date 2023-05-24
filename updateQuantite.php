@@ -33,7 +33,7 @@ if (!isset($data->id_panier)|| !isset($data->id_product)) {
 
 try {
 
-    $fetch_post = "SELECT * FROM `ligne_commande` WHERE id_product=:id_product and id_panier=:id_panier";
+    $fetch_post = "SELECT * FROM `Ligne_commande` WHERE id_product=:id_product and id_panier=:id_panier";
     $fetch_stmt = $con->prepare($fetch_post);
     $fetch_stmt->bindValue(':id_panier', $data->id_panier, PDO::PARAM_INT);
     $fetch_stmt->bindValue(':id_product', $data->id_product, PDO::PARAM_INT);
@@ -44,7 +44,7 @@ try {
         $id_product = isset($data->id_product) ? $data->id_product : $row['id_product'];
         $id_panier = isset($data->id_panier) ? $data->id_panier : $row['id_panier'];
         $quantite = $data->quantite;
-        $update_query = "UPDATE `ligne_commande` SET quantite = :quantite
+        $update_query = "UPDATE `Ligne_commande` SET quantite = :quantite
         WHERE id_product = :id_product and id_panier= :id_panier";
 
         $update_stmt = $con->prepare($update_query);
